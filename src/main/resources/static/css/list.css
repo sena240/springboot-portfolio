@@ -1,0 +1,96 @@
+body {
+    padding-top: 56px;
+}
+
+table {
+	width: 90%;
+	border-collapse: collapse;
+	font-size: 12px;
+}
+
+table thead {
+	border-bottom: 1px solid darkgray;
+}
+
+table th,
+table td {
+	border: 1px none;
+	padding: 6px;
+}
+
+/* table th {
+	background-color: #F2F2F2;
+} */
+
+.table> :not(:first-child) {
+	border-top: 0;
+}
+
+.custom-width {
+    width: 300px; /* 任意の幅を指定 */
+}
+
+.page-link.min-size {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+.text-navy {
+	color: #224abe;
+}
+
+.btn-circle {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	opacity: 0.5;
+	border: 0;
+}
+
+.btn-white {
+	color: black;
+	background-color: white;
+}
+
+.btn-darkgrey {
+	color: white;
+	background-color: darkgrey;
+}
+
+.btn-navy {
+	color: white;
+	background-color: #224abe;
+}
+
+.btn-navy:hover {
+	color: white;
+	background-color: #0d47a1;
+}
+
+/* Off-Canvas (SideBar) */
+.offcanvas {
+	width: 200px !important;
+	margin-top: 56px;
+}
+
+@media (min-width: 992px) {
+	.offcanvas {
+		transform: none !important;
+		visibility: visible !important;
+	}
+
+	.offcanvas-outside {
+		transition: margin-left 0.3s ease-in-out;
+		margin-left: 200px;
+	}
+}
+
+/* Link */
+a {
+	text-decoration: none;
+}
+
+/* Size */
+.mh-100 {
+	height: calc(100vh - 56px)
+}

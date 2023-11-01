@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+
+<head>
+	<meta charset="utf-8" th:remove=tag />
+	<meta name=" viewport" content=" width = device-width, initial-scale = 1">
+
+	<link th:href="@{/css/list.css}" rel="stylesheet">
+
+	<title>メンバー登録 - プロジェクト管理アプリ</title>
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<main class="offcanvas-outside bg-light">
+			<div class="container-fluid">
+
+				<!-- トグルボタン -->
+				<div th:replace="~{fragments/sidebar :: toggler}">
+				</div>
+
+				<div class="row">
+					<div class="col">
+						<div class="card shadow">
+							<div class="card-header">
+								<div class="d-flex justify-content-between align-items-center">
+									<div class="d-flex">
+										<h6 class="text-navy my-2"><i class="bi bi-person me-2"></i>メンバー</h6>
+										<nav aria-label="breadcrumb" class="ms-4 my-auto">
+											<ol class="breadcrumb my-auto">
+												<li class="breadcrumb-item"><a th:href="@{/member/list}">一覧</a></li>
+												<li class="breadcrumb-item active" aria-current="page">登録</li>
+											</ol>
+										</nav>
+									</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<form th:action="@{/process}" th:object="${member}" method="post" autocomplete="off"
+									id="memberForm">
+									<input type="hidden" th:field="*{memberId}">
+									<div class="row justify-content-center">
+										<div class=" mb-3 me-5 col-5">
+											<label for="member_name">名前</label>
+											<input type="text" class=" form-control form-control-sm mb-3"
+												th:errorclass="is-invalid" th:field="*{memberName}">
+											<!-- <div class="invalid-feedback" th:errors="*{memberName}"></div> -->
+
+											<div class="row">
+												<div class=" mb-3 col">
+													<label for="furigana">フリガナ</label>
+													<input type="text" class=" form-control form-control-sm"
+														th:errorclass="is-invalid" th:field="*{furigana}">
+													<!-- <div class="invalid-feedback" th:errors="*{furigana}"></div> -->
+												</div>
+											</div>
+											<div class="row">
+												<div class=" mb-3 col">
+													<label for="address">住所</label>
+													<input type="text" class=" form-control form-control-sm"
+														th:errorclass="is-invalid" th:field="*{address}">
+													<!-- <div class="invalid-feedback" th:errors="*{address}"></div> -->
+												</div>
+											</div>
+											<div class="row">
+												<div class=" mb-3 col">
+													<label for="phone">電話番号</label>
+													<input type="text" class=" form-control form-control-sm"
+														th:errorclass="is-invalid" th:field="*{phone}">
+													<!-- <div class="invalid-feedback" th:errors="*{phone}"></div> -->
+												</div>
+											</div>
+											<div class="row">
+												<div class=" mb-3 col">
+													<label for="mail">連絡先メール</label>
+													<input type="text" class=" form-control form-control-sm"
+														th:errorclass="is-invalid" th:field="*{mail}">
+													<!-- <div class="invalid-feedback" th:errors="*{mail}"></div> -->
+												</div>
+											</div>
+											<div class="row">
+												<div class=" mb-3 col">
+													<label for="department">部署名</label>
+													<select class="form-select  form-select-sm"
+														th:field="*{department}">
+														<th:block
+															th:each="department : ${@departmentRepository.findAll()}">
+															<option th:value="${department.departmentId}"
+																th:text="${department.departmentName}">
+															</option>
+														</th:block>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="mb-3 col-6">
+											<label for="notes">備考</label>
+											<textarea rows="13" class="form-control" th:errorclass=" is-invalid"
+												th:field="*{notes}"></textarea>
+											<!-- <div class="invalid-feedback" th:errors="*{notes}"></div> -->
+										</div>
+									</div>
+									<hr>
+									<div class="row justify-content-center">
+										<button class="btn btn-primary col-2" data-bs-toggle="modal"
+											data-bs-target="#saveConfirmModal" type="button">
+											<i class="bi bi-pencil-square"></i>
+											<span class="text">保存</span>
+										</button>
+										<a th:href="@{/member/list}" class=" btn btn-outline-secondary col-1 ms-2">
+											<i class="bi bi-arrow-left-circle"></i>
+											<span class="text">戻る</span>
+										</a>
+									</div>
+								</form>
+								<!-- 登録確認モーダルウィンドウ -->
+								<div class="modal" tabindex="-1" id="saveConfirmModal">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title">登録確認</h5>
+												<button type="button" class="btn-close" data-bs-dismiss="modal"
+													aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												<p>この内容で登録しますか？</p>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">キャンセル</button>
+												<button type="button" class="btn btn-primary col-2"
+													id="confirmAdd">OK</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
+
+	<script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>
