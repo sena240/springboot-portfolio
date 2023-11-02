@@ -114,35 +114,19 @@
 										<!-- 最初のページへのリンク -->
 										<li class="page-item" th:class="${page.first ? 'disabled' : ''}"
 											th:if="${!page.first}">
-											<a class="page-link min-size" th:href="@{/member/list?page=0}">&lt;&lt;</a>
+											<a class="page-link min-size" th:href="@{/member/list?page=0}">&laquo;</a>
 										</li>
-
-										<!-- 前のページへのリンク -->
-										<li class="page-item" th:class="${page.first ? 'disabled' : ''}"
-											th:if="${!page.first}">
-											<a class="page-link min-size"
-												th:href="@{'/member/list?page=' + ${page.number-1}}">&lt;</a>
-										</li>
-
 										<!-- 各ページへのリンク -->
 										<li class="page-item" th:each="i : ${#numbers.sequence(0, page.totalPages-1)}"
 											th:class="${i == page.number ? 'active' : ''}">
 											<a class="page-link min-size"
 												th:href="@{'/member/list?page=' + ${i}}">[[${i+1}]]</a>
 										</li>
-
-										<!-- 次のページへのリンク -->
-										<li class="page-item" th:class="${page.last ? 'disabled' : ''}"
-											th:if="${!page.last}">
-											<a class="page-link min-size"
-												th:href="@{'/member/list?page=' + ${page.number+1}}">&gt;</a>
-										</li>
-
 										<!-- 最後のページへのリンク -->
 										<li class="page-item" th:class="${page.last ? 'disabled' : ''}"
 											th:if="${!page.last}">
 											<a class="page-link min-size"
-												th:href="@{'/member/list?page=' + ${page.totalPages-1}}">&gt;&gt;</a>
+												th:href="@{'/member/list?page=' + ${page.totalPages-1}}">&raquo;</a>
 										</li>
 									</ul>
 								</div>

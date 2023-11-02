@@ -12,6 +12,10 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 
@@ -27,14 +31,18 @@ public class Member {
     private Long memberId;
 
     // 名前
+    @NotBlank(message = "名前は入力必須です")
     @Column(name = "member_name")
     private String memberName;
     
     // フリガナ
+    @NotBlank(message = "フリガナは入力必須です")
+    @Pattern(regexp = "^[ァ-ヶー]*$", message = "フリガナはカタカナのみ入力してください")
     @Column(name = "furigana")
     private String furigana;
     
     // 所属部門（FK）
+    @NotNull(message = "部門は入力必須です")
     @ManyToOne
     private Department department;
     
@@ -43,10 +51,13 @@ public class Member {
     private String address;
     
     // 電話番号
+    @Pattern(regexp = "[0-9-]*", message = "電話番号は半角数字かハイフンのみ入力してください")
     @Column(name = "phone")
     private String phone;
 
     // 連絡先メール
+    @NotBlank(message = "連絡先メールは入力必須です")
+    @Email(message = "有効なメールアドレスを入力してください")
     @Column(name = "mail")
     private String mail;
 

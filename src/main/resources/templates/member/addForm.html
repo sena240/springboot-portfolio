@@ -45,14 +45,14 @@
 											<label for="member_name">名前</label>
 											<input type="text" class=" form-control form-control-sm mb-3"
 												th:errorclass="is-invalid" th:field="*{memberName}">
-											<!-- <div class="invalid-feedback" th:errors="*{memberName}"></div> -->
+											<div class="invalid-feedback" th:errors="*{memberName}"></div>
 
 											<div class="row">
 												<div class=" mb-3 col">
 													<label for="furigana">フリガナ</label>
 													<input type="text" class=" form-control form-control-sm"
 														th:errorclass="is-invalid" th:field="*{furigana}">
-													<!-- <div class="invalid-feedback" th:errors="*{furigana}"></div> -->
+													<div class="invalid-feedback" th:errors="*{furigana}"></div>
 												</div>
 											</div>
 											<div class="row">
@@ -68,7 +68,7 @@
 													<label for="phone">電話番号</label>
 													<input type="text" class=" form-control form-control-sm"
 														th:errorclass="is-invalid" th:field="*{phone}">
-													<!-- <div class="invalid-feedback" th:errors="*{phone}"></div> -->
+													<div class="invalid-feedback" th:errors="*{phone}"></div>
 												</div>
 											</div>
 											<div class="row">
@@ -76,7 +76,7 @@
 													<label for="mail">連絡先メール</label>
 													<input type="text" class=" form-control form-control-sm"
 														th:errorclass="is-invalid" th:field="*{mail}">
-													<!-- <div class="invalid-feedback" th:errors="*{mail}"></div> -->
+													<div class="invalid-feedback" th:errors="*{mail}"></div>
 												</div>
 											</div>
 											<div class="row">
@@ -85,7 +85,7 @@
 													<select class="form-select  form-select-sm"
 														th:field="*{department}">
 														<th:block
-															th:each="department : ${@departmentRepository.findAll()}">
+															th:each="department : *{@departmentService.allDepartment()}">
 															<option th:value="${department.departmentId}"
 																th:text="${department.departmentName}">
 															</option>
