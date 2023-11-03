@@ -13,15 +13,21 @@
 </head>
 
 <body>
+	<!-- navbar -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="navbar">
 		<div class="container-fluid d-flex justify-content-between align-items-center">
-			<a class="navbar-brand px-3"><i class="bi bi-people-fill me-2"></i>プロジェクト管理アプリ</a>
+			<div class="d-flex">
+				<!-- トグルボタン -->
+				<div th:replace="~{fragments/sidebar :: toggler}">
+				</div>
+				<a class="navbar-brand"><i class="bi bi-people-fill me-2"></i>プロジェクト管理アプリ</a>
+			</div>
 			<div class="d-flex">
 				<div class="align-self-center">
 					<span class="text-white ms-3 me-5">開発部門：バックエンド開発G</span>
 				</div>
-				<div>
-					<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+				<div class="d-flex">
+					<button class="navbar-toggler custom-toggler me-2" type="button" data-bs-toggle="collapse"
 						data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown"
 						aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
@@ -50,7 +56,7 @@
 			</div>
 		</div>
 	</nav>
-
+	<!-- sidebar -->
 	<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
 		id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
 		<nav class="navbar-dark bg-light text-black h-100">
@@ -113,9 +119,13 @@
 			<i class="bi bi-question-square me-2"></i>ヘルプ
 		</a>
 	</div>
+	<!-- mini-sidebar
+	<div th:replace="~{fragments/sidebar :: mini-sidebar}">
+	</div> -->
 
 	<!-- 登録完了トースト -->
-	<div class="toast-container position-absolute" style="top: 8%; left: 50%; transform: translateX(-50%); z-index: 1050;">
+	<div class="toast-container position-absolute"
+		style="top: 8%; left: 50%; transform: translateX(-50%); z-index: 1050;">
 		<div class="toast" id="toastAdd" role="alert" aria-live="assertive" aria-atomic="true">
 			<div class="d-flex">
 				<div class="toast-body">
@@ -125,8 +135,21 @@
 			</div>
 		</div>
 	</div>
-		<!-- 削除完了トースト -->
-	<div class="toast-container position-absolute" style="top: 8%; left: 50%; transform: translateX(-50%); z-index: 1050;">
+		<!-- 編集完了トースト -->
+	<div class="toast-container position-absolute"
+		style="top: 8%; left: 50%; transform: translateX(-50%); z-index: 1050;">
+		<div class="toast" id="toastEdit" role="alert" aria-live="assertive" aria-atomic="true">
+			<div class="d-flex">
+				<div class="toast-body">
+					<i class="bi bi-check-circle me-2"></i>編集が完了しました。
+				</div>
+				<button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+			</div>
+		</div>
+	</div>
+	<!-- 削除完了トースト -->
+	<div class="toast-container position-absolute"
+		style="top: 8%; left: 50%; transform: translateX(-50%); z-index: 1050;">
 		<div class="toast" id="toastDelete" role="alert" aria-live="assertive" aria-atomic="true">
 			<div class="d-flex">
 				<div class="toast-body">
@@ -136,12 +159,17 @@
 			</div>
 		</div>
 	</div>
+
 	<div layout:fragment="content">
 	</div>
 
 	<script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
-	<script src="/js/memberDelete.js"></script>
 	<script src="/js/memberAdd.js"></script>
+	<script src="/js/memberEdit.js"></script>
+	<script src="/js/memberDelete.js"></script>
 	<script src="/js/addToast.js"></script>
+	<script src="/js/editToast.js"></script>
 	<script src="/js/deleteToast.js"></script>
 </body>
+
+</html>

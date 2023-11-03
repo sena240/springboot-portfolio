@@ -4,7 +4,6 @@ let memberIdToDelete;
 
 // モーダルが表示される前のイベント
 deleteModal.addEventListener('show.bs.modal', function(event) {
-    // クリックされた削除ボタンを取得
     let deleteButton = event.relatedTarget;
 
     // th:data-member-idを取得

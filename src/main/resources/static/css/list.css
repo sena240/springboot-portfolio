@@ -1,5 +1,18 @@
 body {
-    padding-top: 56px;
+	padding-top: 56px;
+}
+
+.custom-toggler {
+	width: 40px;
+	height: 25px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.custom-toggler .navbar-toggler-icon {
+	vertical-align: middle;
+	display: inline-block;
 }
 
 table {
@@ -27,12 +40,13 @@ table td {
 }
 
 .custom-width {
-    width: 300px; /* 任意の幅を指定 */
+	width: 300px;
+	/* 任意の幅を指定 */
 }
 
 .page-link.min-size {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.875rem;
+	padding: 0.25rem 0.5rem;
+	font-size: 0.875rem;
 }
 
 .text-navy {

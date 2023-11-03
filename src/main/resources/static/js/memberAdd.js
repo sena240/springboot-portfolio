@@ -1,7 +1,7 @@
-const trigger = document.getElementById('confirmAdd');
+const addTrigger = document.getElementById('confirmAdd');
 
-if (trigger) {
-	trigger.addEventListener('click', function() {
+if (addTrigger) {
+	addTrigger.addEventListener('click', function() {
 		document.querySelector('form').submit();
 	})
 }

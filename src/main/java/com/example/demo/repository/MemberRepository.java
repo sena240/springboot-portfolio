@@ -12,7 +12,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
 	public Page<Member> findAll(Pageable pageable);
 
-	@Query("SELECT m FROM Member m WHERE m.memberName LIKE %:query% OR m.mail LIKE %:query% OR m.phone LIKE %:query%")
+	@Query("SELECT m FROM Member m WHERE m.memberName LIKE %:query% OR m.furigana LIKE %:query% OR m.mail LIKE %:query% OR m.department.departmentName LIKE %:query%")
 	Page<Member> searchByQuery(@Param("query") String query, Pageable pageable);
 
 }

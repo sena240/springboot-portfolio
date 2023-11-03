@@ -8,7 +8,7 @@
 
 	<link th:href="@{/css/list.css}" rel="stylesheet">
 
-	<title>メンバー登録 - プロジェクト管理アプリ</title>
+	<title>メンバー編集 - プロジェクト管理アプリ</title>
 </head>
 
 <body>
@@ -16,13 +16,9 @@
 		<main class="offcanvas-outside bg-light">
 			<div class="container-fluid">
 
-				<!-- トグルボタン -->
-				<div th:replace="~{fragments/sidebar :: toggler}">
-				</div>
-
 				<div class="row">
 					<div class="col">
-						<div class="card shadow">
+						<div class="card shadow mt-2">
 							<div class="card-header">
 								<div class="d-flex justify-content-between align-items-center">
 									<div class="d-flex">
@@ -37,51 +33,62 @@
 								</div>
 							</div>
 							<div class="card-body">
-								<form th:action="@{/process}" th:object="${member}" method="post" autocomplete="off"
-									id="memberForm">
+								<form th:action="@{/processEdit}" th:object="${member}" method="post" autocomplete="off"
+									id="editForm">
 									<input type="hidden" th:field="*{memberId}">
 									<div class="row justify-content-center">
 										<div class=" mb-3 me-5 col-5">
-											<label for="member_name">名前</label>
-											<input type="text" class=" form-control form-control-sm mb-3"
-												th:errorclass="is-invalid" th:field="*{memberName}">
-											<!-- <div class="invalid-feedback" th:errors="*{memberName}"></div> -->
+											<div class="row">
+												<div class=" mb-3 col">
+													<label for="member_name">名前<span
+															class="text-danger text-opacity-75">
+															- 必須</span></label>
+													<input type="text" class=" form-control form-control-sm"
+														th:errorclass="is-invalid" th:field="*{memberName}">
+													<div class="invalid-feedback" th:errors="*{memberName}"></div>
+												</div>
+											</div>
 
 											<div class="row">
 												<div class=" mb-3 col">
-													<label for="furigana">フリガナ</label>
+													<label for="furigana">フリガナ<span class="text-danger text-opacity-75">
+															- 必須</span></label>
 													<input type="text" class=" form-control form-control-sm"
 														th:errorclass="is-invalid" th:field="*{furigana}">
-													<!-- <div class="invalid-feedback" th:errors="*{furigana}"></div> -->
+													<div class="invalid-feedback" th:errors="*{furigana}"></div>
 												</div>
 											</div>
 											<div class="row">
 												<div class=" mb-3 col">
-													<label for="address">住所</label>
+													<label for="address">住所<span class="text-secondary text-opacity-75">
+															- 任意</span></label>
 													<input type="text" class=" form-control form-control-sm"
-														th:errorclass="is-invalid" th:field="*{address}">
-													<!-- <div class="invalid-feedback" th:errors="*{address}"></div> -->
+														th:field="*{address}">
 												</div>
 											</div>
 											<div class="row">
 												<div class=" mb-3 col">
-													<label for="phone">電話番号</label>
+													<label for="phone">電話番号<span class="text-secondary text-opacity-75">
+															- 任意</span></label>
 													<input type="text" class=" form-control form-control-sm"
 														th:errorclass="is-invalid" th:field="*{phone}">
-													<!-- <div class="invalid-feedback" th:errors="*{phone}"></div> -->
+													<div class="invalid-feedback" th:errors="*{phone}"></div>
 												</div>
 											</div>
 											<div class="row">
 												<div class=" mb-3 col">
-													<label for="mail">連絡先メール</label>
+													<label for="mail">連絡先メール<span class="text-danger text-opacity-75">
+															- 必須</span></label>
 													<input type="text" class=" form-control form-control-sm"
 														th:errorclass="is-invalid" th:field="*{mail}">
-													<!-- <div class="invalid-feedback" th:errors="*{mail}"></div> -->
+													<div class="invalid-feedback" th:errors="*{mail}"></div>
 												</div>
 											</div>
 											<div class="row">
 												<div class=" mb-3 col">
-													<label for="department">部署名</label>
+													<label for="department">所属グループ名<span
+															class="text-danger text-opacity-75">
+															- 必須</span></label>
 													<select class="form-select form-select-sm"
 														th:field="*{department.departmentId}">
 														<th:block th:each="department : ${departments}">
@@ -91,15 +98,13 @@
 															</option>
 														</th:block>
 													</select>
-
 												</div>
 											</div>
 										</div>
 										<div class="mb-3 col-6">
-											<label for="notes">備考</label>
-											<textarea rows="13" class="form-control" th:errorclass=" is-invalid"
-												th:field="*{notes}"></textarea>
-											<!-- <div class="invalid-feedback" th:errors="*{notes}"></div> -->
+											<label for="notes">備考<span class="text-secondary text-opacity-75">
+													- 任意</span></label>
+											<textarea rows="13" class="form-control" th:field="*{notes}"></textarea>
 										</div>
 									</div>
 									<hr>
@@ -115,23 +120,23 @@
 										</a>
 									</div>
 								</form>
-								<!-- 登録確認モーダルウィンドウ -->
+								<!-- 編集確認モーダルウィンドウ -->
 								<div class="modal" tabindex="-1" id="saveConfirmModal">
 									<div class="modal-dialog">
 										<div class="modal-content">
 											<div class="modal-header">
-												<h5 class="modal-title">登録確認</h5>
+												<h5 class="modal-title">編集確認</h5>
 												<button type="button" class="btn-close" data-bs-dismiss="modal"
 													aria-label="Close"></button>
 											</div>
 											<div class="modal-body">
-												<p>この内容で登録しますか？</p>
+												<p>この内容で編集しますか？</p>
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-secondary"
 													data-bs-dismiss="modal">キャンセル</button>
 												<button type="button" class="btn btn-primary col-2"
-													id="confirmAdd">OK</button>
+													id="confirmEdit">OK</button>
 											</div>
 										</div>
 									</div>

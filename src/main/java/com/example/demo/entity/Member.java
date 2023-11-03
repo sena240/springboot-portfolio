@@ -1,6 +1,5 @@
 package com.example.demo.entity;
 
-
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -18,60 +17,58 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
-
 @Entity
 @Data
 @Table(name = "member")
 public class Member {
 
-    // ID
-    @Id
-    @Column(name = "member_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long memberId;
+	// ID
+	@Id
+	@Column(name = "member_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long memberId;
 
-    // 名前
-    @NotBlank(message = "名前は入力必須です")
-    @Column(name = "member_name")
-    private String memberName;
-    
-    // フリガナ
-    @NotBlank(message = "フリガナは入力必須です")
-    @Pattern(regexp = "^[ァ-ヶー]*$", message = "フリガナはカタカナのみ入力してください")
-    @Column(name = "furigana")
-    private String furigana;
-    
-    // 所属部門（FK）
-    @NotNull(message = "部門は入力必須です")
-    @ManyToOne
-    private Department department;
-    
-    // 住所
-    @Column(name = "address")
-    private String address;
-    
-    // 電話番号
-    @Pattern(regexp = "[0-9-]*", message = "電話番号は半角数字かハイフンのみ入力してください")
-    @Column(name = "phone")
-    private String phone;
+	// 名前
+	@NotBlank(message = "名前を入力してください")
+	@Column(name = "member_name")
+	private String memberName;
 
-    // 連絡先メール
-    @NotBlank(message = "連絡先メールは入力必須です")
-    @Email(message = "有効なメールアドレスを入力してください")
-    @Column(name = "mail")
-    private String mail;
+	// フリガナ
+	@Pattern(regexp = "^(?=.*[ァ-ヶー])[ァ-ヶー\u3000\\s]+$", message = "フリガナをカタカナで入力してください")
+	@Column(name = "furigana")
+	private String furigana;
 
-    // 備考
-    @Column(name = "notes")
-    private String notes;
-    
-    //リレーション
-    @OneToMany(mappedBy = "member")
-    private List<Task> tasks;
-    
-    @ManyToMany(mappedBy = "members")
-    private List<Project> projects;
-    
-    @ManyToMany(mappedBy = "members")
-    private List<Meeting> meetings;
+	// 所属部門（FK）
+	@NotNull
+	@ManyToOne
+	private Department department;
+
+	// 住所
+	@Column(name = "address")
+	private String address;
+
+	// 電話番号
+	@Pattern(regexp = "[0-9-]*", message = "電話番号は半角数字とハイフンで入力してください")
+	@Column(name = "phone")
+	private String phone;
+
+	// 連絡先メール
+	@NotBlank(message = "連絡先メールを入力してください")
+	@Email(message = "有効なメールアドレスを入力してください")
+	@Column(name = "mail")
+	private String mail;
+
+	// 備考
+	@Column(name = "notes")
+	private String notes;
+
+	//リレーション
+	@OneToMany(mappedBy = "member")
+	private List<Task> tasks;
+
+	@ManyToMany(mappedBy = "members")
+	private List<Project> projects;
+
+	@ManyToMany(mappedBy = "members")
+	private List<Meeting> meetings;
 }
