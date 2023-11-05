@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+
+<head>
+	<meta charset="utf-8" th:remove=tag />
+	<meta name="viewport" content="width = device-width, initial-scale = 1">
+
+	<link th:href="@{/css/list.css}" rel="stylesheet">
+
+	<title>タスクタグ一覧 - プロジェクト管理アプリ</title>
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<main class="offcanvas-outside bg-light">
+			<div class="container-fluid">
+				<!-- main content -->
+				<div class="row">
+					<div class="col">
+						<div class="card shadow mt-2">
+							<div class="card-header">
+								<div class="d-flex justify-content-between align-items-center">
+									<div class="d-flex">
+										<h6 class="text-navy my-2"><i class="bi bi-tag me-2"></i>タスクタグ</h6>
+										<nav aria-label="breadcrumb" class="ms-4 my-auto">
+											<ol class="breadcrumb my-auto">
+												<li class="breadcrumb-item active" aria-current="page">一覧</li>
+											</ol>
+										</nav>
+									</div>
+									<div class="d-flex justify-content-end">
+										<!-- 登録ボタン -->
+										<a th:href="@{/taskTag/add}" class=" btn btn-primary btn-sm ms-5">
+											<i class="bi bi-plus-circle"></i>
+											<span class="text">登録</span>
+										</a>
+									</div>
+								</div>
+							</div>
+							<!-- table data -->
+							<div class="card-body">
+								<div th:if="${taskTags.size() == 0}" class="mb-3">該当データがありません</div>
+								<table th:if="${taskTags.size() > 0}" id="taskTag-table" class="table table-hover mb-2">
+									<thead class="table-light">
+										<tr>
+											<th>タスクタグ名</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody class="align-self-center">
+										<tr th:each="taskTag : ${taskTags}" th:object="${taskTag}" data-taskTag-id="${taskTag.taskTagId}">
+											<td th:text="${taskTag.taskTagName}"></td>
+											<td>
+												<div class="btn-group">
+													<button class="btn btn-white dropdown-toggle" type="button"
+														style="--bs-btn-padding-y: .01rem; --bs-btn-padding-x: .2rem; --bs-btn-font-size: .7rem;"
+														data-bs-toggle="dropdown" data-bs-auto-close="outside"
+														aria-expanded="false">
+														<i class="bi bi-three-dots"></i>
+													</button>
+													<ul class="dropdown-menu">
+														<li><a class="dropdown-item"
+																th:href="@{/taskTag/edit/{taskTagId}(taskTagId=*{taskTagId})}">
+																<i class="bi bi-pencil me-2"></i>編集</a>
+														</li>
+														<li><a class="dropdown-item"
+																th:href="@{/taskTag/delete/{taskTagId}(taskTagId=*{taskTagId})}">
+																<i class="bi bi-trash3 me-2"></i>削除</a>
+														</li>
+													</ul>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<hr th:if="${taskTags.size() > 0}">
+								<div class="d-flex justify-content-between align-items-center me-3">
+									<!-- Total count display -->
+									<div th:if="${taskTags.size() > 0}" class="record-info ms-3">
+										全 [[${page.totalElements}]] 件
+									</div>
+									<!-- ページネーション -->
+									<ul th:if="${taskTags.size() > 0}" class="pagination d-flex justify-content-end">
+										<!-- 最初のページへのリンク -->
+										<li class="page-item" th:class="${page.first ? 'disabled' : ''}"
+											th:if="${!page.first}">
+											<a class="page-link min-size"
+												th:href="@{|/taskTag/list?page=0&query=${query}|}">&laquo;</a>
+										</li>
+										<!-- 各ページへのリンク -->
+										<li class="page-item" th:each="i : ${#numbers.sequence(0, page.totalPages-1)}"
+											th:class="${i == page.number ? 'active' : ''}">
+											<a class="page-link min-size"
+												th:href="@{'/taskTag/list?page=' + ${i} + '&query=' + ${query}}">[[${i+1}]]</a>
+										</li>
+										<!-- 最後のページへのリンク -->
+										<li class="page-item" th:class="${page.last ? 'disabled' : ''}"
+											th:if="${!page.last}">
+											<a class="page-link min-size"
+												th:href="@{'/taskTag/list?page=' + ${page.totalPages-1} + '&query=' + ${query}}">&raquo;</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
+	<script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>

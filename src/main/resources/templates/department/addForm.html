@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+
+<head>
+	<meta charset="utf-8" th:remove=tag />
+	<meta name=" viewport" content=" width = device-width, initial-scale = 1">
+
+	<link th:href="@{/css/list.css}" rel="stylesheet">
+
+	<title>所属登録 - プロジェクト管理アプリ</title>
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<main class="offcanvas-outside bg-light">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col">
+						<div class="card shadow mt-2">
+							<div class="card-header">
+								<div class="d-flex justify-content-between align-items-center">
+									<div class="d-flex">
+										<h6 class="text-navy my-2"><i class="bi bi-diagram-3 me-2"></i>所属</h6>
+										<nav aria-label="breadcrumb" class="ms-4 my-auto">
+											<ol class="breadcrumb my-auto">
+												<li class="breadcrumb-item"><a th:href="@{/department/list}">一覧</a></li>
+												<li class="breadcrumb-item active" aria-current="page">登録</li>
+											</ol>
+										</nav>
+									</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<form th:action="@{/department/processAdd}" th:object="${department}" method="post"
+									autocomplete="off" id="departmentForm">
+									<input type="hidden" th:field="*{departmentId}">
+									<div class="row justify-content-center">
+										<div class=" mb-3 me-5 col-5">
+											<div class="row">
+												<div class=" mb-3 col">
+													<label for="department_name">所属名<span
+															class="text-danger text-opacity-75">
+															- 必須</span></label>
+													<input type="text" class=" form-control form-control-sm"
+														th:errorclass="is-invalid" th:field="*{departmentName}">
+													<div class="invalid-feedback" th:errors="*{departmentName}"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<hr>
+									<div class="row justify-content-center">
+										<button class="btn btn-primary col-2" data-bs-toggle="modal"
+											data-bs-target="#saveConfirmModal" type="button">
+											<i class="bi bi-pencil-square"></i>
+											<span class="text">保存</span>
+										</button>
+										<a th:href="@{/department/list}" class=" btn btn-outline-secondary col-1 ms-2">
+											<i class="bi bi-arrow-left-circle"></i>
+											<span class="text">戻る</span>
+										</a>
+									</div>
+								</form>
+								<!-- 登録確認モーダルウィンドウ -->
+								<div class="modal" tabindex="-1" id="saveConfirmModal">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title">登録確認</h5>
+												<button type="button" class="btn-close" data-bs-dismiss="modal"
+													aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												<p>この内容で登録しますか？</p>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">キャンセル</button>
+												<button type="button" class="btn btn-primary col-2"
+													id="confirmAdd">OK</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
+
+	<script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>

@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Entity
@@ -23,6 +24,7 @@ public class MeetingRoom {
 	private Long meetingRoomId;
 	
 	// 会議室名
+	@NotBlank(message = "会議室名を入力してください")
 	@Column(name = "meeting_room_name")
 	private String meetingRoomName;
 	

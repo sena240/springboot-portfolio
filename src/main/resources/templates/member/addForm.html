@@ -33,14 +33,14 @@
 								</div>
 							</div>
 							<div class="card-body">
-								<form th:action="@{/processAdd}" th:object="${member}" method="post" autocomplete="off"
+								<form th:action="@{/member/processAdd}" th:object="${member}" method="post" autocomplete="off"
 									id="memberForm">
 									<input type="hidden" th:field="*{memberId}">
 									<div class="row justify-content-center">
 										<div class=" mb-3 me-5 col-5">
 											<div class="row">
 												<div class=" mb-3 col">
-													<label for="member_name">名前<span class="text-danger text-opacity-75">
+													<label for="member_name">メンバー名<span class="text-danger text-opacity-75">
 															- 必須</span></label>
 													<input type="text" class=" form-control form-control-sm"
 														th:errorclass="is-invalid" th:field="*{memberName}">
@@ -84,7 +84,7 @@
 											</div>
 											<div class="row">
 												<div class=" mb-3 col">
-													<label for="department">所属グループ名<span class="text-danger text-opacity-75">
+													<label for="department">所属<span class="text-danger text-opacity-75">
 															- 必須</span></label>
 													<select class="form-select  form-select-sm"
 														th:field="*{department.departmentId}">

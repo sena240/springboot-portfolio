@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Entity
@@ -23,8 +24,9 @@ public class Status {
 	private Long statusId;
 	
 	// ステータス名
+	@NotBlank(message = "ステータス名を入力してください")
 	@Column(name = "status_name")
-	private String StatusName;
+	private String statusName;
 	
 	// リレーション
 	@OneToMany(mappedBy = "status")

@@ -51,12 +51,12 @@ public class MemberController {
 		return "member/list";
 	}
 
-	@GetMapping("/add")
-	public String addEmployee(@ModelAttribute Member member) {
+	@GetMapping("/member/add")
+	public String addMember(@ModelAttribute Member member) {
 		return "member/addForm";
 	}
 
-	@PostMapping("/processAdd")
+	@PostMapping("/member/processAdd")
 	public String processAdd(@Validated @ModelAttribute Member member, BindingResult result) {
 		if (result.hasErrors()) {
 			return "/member/addForm";
@@ -65,7 +65,7 @@ public class MemberController {
 		return "redirect:/member/list?addToast=true";
 	}
 
-	@PostMapping("/processEdit")
+	@PostMapping("/member/processEdit")
 	public String processEdit(@Validated @ModelAttribute Member member, BindingResult result) {
 		if (result.hasErrors()) {
 			return "/member/editForm";
@@ -74,7 +74,7 @@ public class MemberController {
 		return "redirect:/member/list?editToast=true";
 	}
 
-	@GetMapping("/edit/{memberId}")
+	@GetMapping("/member/edit/{memberId}")
 	public String editMember(@PathVariable Long memberId, Model model) {
 		Optional<Member> optionalMember = memberService.editMember(memberId);
 
@@ -82,18 +82,16 @@ public class MemberController {
 			Member member = optionalMember.get();
 			model.addAttribute("member", member);
 			model.addAttribute("departments", departmentService.allDepartment());
-
-			if (member.getDepartment() != null) {
-				model.addAttribute("selectedDepartmentId", member.getDepartment().getDepartmentId());
-			}
 		}
 		return "member/editForm";
 	}
 
-	@GetMapping("/delete/{memberId}")
+	@GetMapping("/member/delete/{memberId}")
 	public String deleteMember(@PathVariable Long memberId) {
-		memberService.deleteMember(memberId);
-		return "redirect:/member/list?deleteToast=true";
+		if (memberService.deleteMember(memberId)) {
+			return "redirect:/member/list?deleteToast=true";
+		} else {
+			return "redirect:/member/list?deleteToast=false";
+		}	
 	}
-
 }

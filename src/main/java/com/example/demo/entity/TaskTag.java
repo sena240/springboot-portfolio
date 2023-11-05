@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Entity
@@ -23,8 +24,9 @@ public class TaskTag {
 	private Long taskTagId;
 	
 	// タスクタグ名
+	@NotBlank(message = "タスクタグ名を入力してください")
 	@Column(name = "task_tag_name")
-	private String TaskTagName;
+	private String taskTagName;
 	
 	// リレーション
 	@OneToMany(mappedBy = "taskTag")

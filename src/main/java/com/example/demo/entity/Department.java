@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Entity
@@ -22,7 +23,8 @@ public class Department {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long departmentId;
 
-	// 部門名
+	// 所属名
+	@NotBlank(message = "所属名を入力してください")
 	@Column(name = "department_name")
 	private String departmentName;
 	

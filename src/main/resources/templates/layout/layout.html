@@ -24,7 +24,7 @@
 			</div>
 			<div class="d-flex">
 				<div class="align-self-center">
-					<span class="text-white ms-3 me-5">開発部門：バックエンド開発G</span>
+					<span class="text-white ms-3 me-5">バックエンド開発G</span>
 				</div>
 				<div class="d-flex">
 					<button class="navbar-toggler custom-toggler me-2" type="button" data-bs-toggle="collapse"
@@ -62,7 +62,7 @@
 		<nav class="navbar-dark bg-light text-black h-100">
 			<div class="offcanvas-header">
 				<h4 class="offcanvas-title">
-					<a th:href="@{/user/list}" class="text-black">
+					<a th:href="@{/home/list}" class="text-black">
 						<span class="d-inline-block me-1" style="transform:rotate(-15 deg)">
 							<i class="bi bi-house-door fs-3"></i>
 						</span>HOME
@@ -96,8 +96,8 @@
 				<hr>
 				<ul class="navbar-nav">
 					<li class="nav-item">
-						<a th:href="@{/master/list}" class="nav-link text-black">
-							<i class="bi bi-tag me-2"></i>タグ
+						<a th:href="@{/emergency/list}" class="nav-link text-black">
+							<i class="bi bi-megaphone me-2"></i>緊急
 						</a>
 					</li>
 					<li class="nav-item">
@@ -119,9 +119,6 @@
 			<i class="bi bi-question-square me-2"></i>ヘルプ
 		</a>
 	</div>
-	<!-- mini-sidebar
-	<div th:replace="~{fragments/sidebar :: mini-sidebar}">
-	</div> -->
 
 	<!-- 登録完了トースト -->
 	<div class="toast-container position-absolute"
@@ -135,7 +132,7 @@
 			</div>
 		</div>
 	</div>
-		<!-- 編集完了トースト -->
+	<!-- 編集完了トースト -->
 	<div class="toast-container position-absolute"
 		style="top: 8%; left: 50%; transform: translateX(-50%); z-index: 1050;">
 		<div class="toast" id="toastEdit" role="alert" aria-live="assertive" aria-atomic="true">
@@ -159,17 +156,33 @@
 			</div>
 		</div>
 	</div>
+		<!-- 削除失敗トースト -->
+	<div class="toast-container position-absolute"
+		style="top: 8%; left: 50%; transform: translateX(-50%); z-index: 1050;">
+		<div class="toast" id="toastDeleteError" role="alert" aria-live="assertive" aria-atomic="true">
+			<div class="d-flex">
+				<div class="toast-body">
+					<i class="bi bi-exclamation-circle me-2"></i>削除に失敗しました。
+				</div>
+				<button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+			</div>
+		</div>
+	</div>
 
 	<div layout:fragment="content">
 	</div>
 
 	<script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
-	<script src="/js/memberAdd.js"></script>
-	<script src="/js/memberEdit.js"></script>
-	<script src="/js/memberDelete.js"></script>
+	<script src="/js/add.js"></script>
+	<script src="/js/edit.js"></script>
 	<script src="/js/addToast.js"></script>
 	<script src="/js/editToast.js"></script>
 	<script src="/js/deleteToast.js"></script>
+	<script src="/js/deleteErrorToast.js"></script>
+	<script src="/js/memberDelete.js"></script>
+	<script src="/js/projectDelete.js"></script>
+	<script src="/js/meetingDelete.js"></script>
+	<script src="/js/taskDelete.js"></script>
 </body>
 
 </html>

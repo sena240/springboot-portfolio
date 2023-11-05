@@ -41,12 +41,12 @@
 												</button>
 											</div>
 										</form>
-										<!-- フィルタ/ソートボタン(保留) -->
-										<!-- <button class="btn btn-outline-secondary btn-sm ms-2">
+										<!-- フィルタボタン -->
+										<button class="btn btn-outline-secondary btn-sm ms-2">
 											<i class="bi bi-filter"></i>
-										</button> -->
+										</button>
 										<!-- 登録ボタン -->
-										<a th:href="@{/add}" class=" btn btn-primary btn-sm ms-5">
+										<a th:href="@{/member/add}" class=" btn btn-primary btn-sm ms-5">
 											<i class="bi bi-plus-circle"></i>
 											<span class="text">登録</span>
 										</a>
@@ -59,15 +59,16 @@
 								<table th:if="${members.size() > 0}" id="member-table" class="table table-hover mb-2">
 									<thead class="table-light">
 										<tr>
-											<th>名前</th>
+											<th>メンバー名</th>
 											<th>フリガナ</th>
-											<th>所属グループ</th>
+											<th>所属</th>
 											<th>連絡先メール</th>
 											<th></th>
 										</tr>
 									</thead>
 									<tbody class="align-self-center">
-										<tr th:each="member : ${members}" th:object="${member}">
+										<tr th:each="member : ${members}" th:object="${member}"
+											data-member-id="${member.memberId}">
 											<td th:text="${member.memberName}"></td>
 											<td th:text="${member.furigana}"></td>
 											<td th:text="${member.department.departmentName}"></td>
@@ -82,12 +83,12 @@
 													</button>
 													<ul class="dropdown-menu">
 														<li><a class="dropdown-item"
-																th:href="@{/edit/{memberId}(memberId=*{memberId})}">
+																th:href="@{/member/edit/{memberId}(memberId=*{memberId})}">
 																<i class="bi bi-pencil me-2"></i>編集</a>
 														</li>
 														<li><button type="button" class="dropdown-item delete-button"
 																data-bs-toggle="modal"
-																data-bs-target="#deleteConfirmModal"
+																data-bs-target="#deleteMemberConfirmModal"
 																th:data-member-id="${member.memberId}">
 																<i class="bi bi-trash3 me-2"></i>削除</button>
 														</li>
@@ -126,7 +127,7 @@
 									</ul>
 								</div>
 								<!-- 削除確認モーダルウィンドウ -->
-								<div class="modal" tabindex="-1" id="deleteConfirmModal">
+								<div class="modal" tabindex="-1" id="deleteMemberConfirmModal">
 									<div class="modal-dialog">
 										<div class="modal-content">
 											<div class="modal-header">
@@ -141,7 +142,7 @@
 												<button type="button" class="btn btn-secondary"
 													data-bs-dismiss="modal">キャンセル</button>
 												<button type="button" class="btn btn-danger col-2"
-													id="confirmDelete">OK</button>
+													id="confirmMemberDelete">OK</button>
 											</div>
 										</div>
 									</div>
@@ -153,7 +154,6 @@
 			</div>
 		</main>
 	</div>
-
 	<script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </body>
 

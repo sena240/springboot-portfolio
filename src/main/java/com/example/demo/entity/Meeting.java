@@ -12,7 +12,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -39,7 +38,7 @@ public class Meeting {
 	@Column(name = "meeting_summary")
 	private String meetingSummary;
 	
-	// 会議日時
+	// 会議日
 	@Column(name = "meeting_date")
 	private LocalDate meetingDate;
 	
@@ -52,9 +51,6 @@ public class Meeting {
 	private MeetingRoom meetingRoom;
 	
 	// リレーション
-	@OneToMany(mappedBy = "meeting")
-	private List<MeetingDocument> meetingDocuments;
-	
 	@ManyToMany
     @JoinTable(name = "meeting_member",
     joinColumns = @JoinColumn(name = "meeting_id"),

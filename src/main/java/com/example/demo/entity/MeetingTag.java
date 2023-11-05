@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Entity
@@ -23,6 +24,7 @@ public class MeetingTag {
 	private Long meetingTagId;
 	
 	// 議事録タグ名
+	@NotBlank(message = "議事録タグ名を入力してください")
 	@Column(name = "meeting_tag_name")
 	private String meetingTagName;
 	

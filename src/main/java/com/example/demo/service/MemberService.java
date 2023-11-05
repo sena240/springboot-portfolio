@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -43,9 +44,8 @@ public class MemberService {
 	public Member saveMember(Member member) {
 		return memberRepository.save(member);
 	}
-
-	public Page<Member> getPage(Pageable pageable) {
-		return memberRepository.findAll(pageable);
+	
+	public List<Member> allMember() {
+		return memberRepository.findAll();
 	}
-
 }

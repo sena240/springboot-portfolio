@@ -1,17 +1,16 @@
-let deleteModal = document.getElementById('deleteConfirmModal');
-let deleteBtn = document.getElementById('confirmDelete');
+let deleteMemberModal = document.getElementById('deleteMemberConfirmModal');
+let deleteMemberBtn = document.getElementById('confirmMemberDelete');
 let memberIdToDelete;
 
 // モーダルが表示される前のイベント
-deleteModal.addEventListener('show.bs.modal', function(event) {
-    let deleteButton = event.relatedTarget;
+deleteMemberModal.addEventListener('show.bs.modal', function(event) {
+    let deleteMemberButton = event.relatedTarget;
 
     // th:data-member-idを取得
-    memberIdToDelete = deleteButton.getAttribute('data-member-id');
+    memberIdToDelete = deleteMemberButton.getAttribute('data-member-id');
 });
 
 // モーダルの削除ボタンクリック時のイベント
-deleteBtn.addEventListener('click', function() {
-    window.location.href = `/delete/${memberIdToDelete}`;
+deleteMemberBtn.addEventListener('click', function() {
+    window.location.href = `/member/delete/${memberIdToDelete}`;
 });
-
