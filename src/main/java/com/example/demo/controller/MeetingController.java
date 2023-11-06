@@ -23,6 +23,7 @@ import com.example.demo.entity.Project;
 import com.example.demo.service.MeetingRoomService;
 import com.example.demo.service.MeetingService;
 import com.example.demo.service.MeetingTagService;
+import com.example.demo.service.MemberService;
 import com.example.demo.service.ProjectService;
 
 import lombok.RequiredArgsConstructor;
@@ -35,6 +36,7 @@ public class MeetingController {
 	private final MeetingTagService meetingTagService;
 	private final MeetingRoomService meetingRoomService;
 	private final ProjectService projectService;
+	private final MemberService memberService;
 
 	@ModelAttribute("meetingTags")
 	public List<MeetingTag> populateMeetingTags() {
@@ -66,13 +68,16 @@ public class MeetingController {
 	}
 
 	@GetMapping("/meeting/add")
-	public String addMeeting(@ModelAttribute Meeting meeting) {
+	public String addMeetingForm(Model model) {
+		model.addAttribute("meeting", new Meeting());
+		model.addAttribute("members", memberService.allMember());
 		return "meeting/addForm";
 	}
 
 	@PostMapping("/meeting/processAdd")
-	public String processAdd(@Validated @ModelAttribute Meeting meeting, BindingResult result) {
+	public String processAdd(@Validated @ModelAttribute Meeting meeting, BindingResult result, Model model) {
 		if (result.hasErrors()) {
+			model.addAttribute("members", memberService.allMember());
 			return "/meeting/addForm";
 		}
 		meetingService.saveMeeting(meeting);
@@ -80,8 +85,9 @@ public class MeetingController {
 	}
 
 	@PostMapping("/meeting/processEdit")
-	public String processEdit(@Validated @ModelAttribute Meeting meeting, BindingResult result) {
+	public String processEdit(@Validated @ModelAttribute Meeting meeting, BindingResult result, Model model) {
 		if (result.hasErrors()) {
+			model.addAttribute("members", memberService.allMember());
 			return "/meeting/editForm";
 		}
 		meetingService.saveMeeting(meeting);
@@ -98,6 +104,7 @@ public class MeetingController {
 			model.addAttribute("meetingTags", meetingTagService.allMeetingTag());
 			model.addAttribute("meetingRooms", meetingRoomService.allMeetingRoom());
 			model.addAttribute("projects", projectService.allProject());
+			model.addAttribute("members", memberService.allMember());
 		}
 		return "meeting/editForm";
 	}

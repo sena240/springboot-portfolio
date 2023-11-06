@@ -15,6 +15,14 @@ body {
 	display: inline-block;
 }
 
+#project-summary, #meeting-summary, #task-notes {
+	height: 245px;
+}
+
+#member-notes {
+	height: 315px;
+}
+
 table {
 	width: 90%;
 	border-collapse: collapse;
@@ -31,17 +39,12 @@ table td {
 	padding: 6px;
 }
 
-/* table th {
-	background-color: #F2F2F2;
-} */
-
 .table> :not(:first-child) {
 	border-top: 0;
 }
 
 .custom-width {
 	width: 300px;
-	/* 任意の幅を指定 */
 }
 
 .page-link.min-size {
@@ -69,16 +72,6 @@ table td {
 .btn-darkgrey {
 	color: white;
 	background-color: darkgrey;
-}
-
-.btn-navy {
-	color: white;
-	background-color: #224abe;
-}
-
-.btn-navy:hover {
-	color: white;
-	background-color: #0d47a1;
 }
 
 /* Off-Canvas (SideBar) */

@@ -41,10 +41,10 @@
 												</button>
 											</div>
 										</form>
-										<!-- フィルタボタン -->
-										<button class="btn btn-outline-secondary btn-sm ms-2">
+										<!-- フィルタボタン（保留） -->
+										<!-- <button class="btn btn-outline-secondary btn-sm ms-2">
 											<i class="bi bi-filter"></i>
-										</button>
+										</button> -->
 										<!-- 登録ボタン -->
 										<a th:href="@{/meeting/add}" class=" btn btn-primary btn-sm ms-5">
 											<i class="bi bi-plus-circle"></i>
@@ -61,9 +61,9 @@
 										<tr>
 											<th>議事録名</th>
 											<th>議事録タグ</th>
-											<th>会議日</th>
-											<th>関連プロジェクト</th>
+											<th>会議日</th>										
 											<th>会議室</th>
+											<th>関連プロジェクト</th>
 											<th></th>
 										</tr>
 									</thead>
@@ -72,9 +72,9 @@
 											data-meeting-id="${meeting.meetingId}">
 											<td th:text="${meeting.meetingName}"></td>
 											<td th:text="${meeting.meetingTag.meetingTagName}"></td>
-											<td th:text="${meeting.meetingDate}"></td>
-											<td th:text="${meeting.project.projectName}"></td>
+											<td th:text="${meeting.meetingDate}"></td>											
 											<td th:text="${meeting.meetingRoom.meetingRoomName}"></td>
+											<td th:text="${meeting.project.projectName}"></td>
 											<td>
 												<div class="btn-group">
 													<button class="btn btn-white dropdown-toggle" type="button"

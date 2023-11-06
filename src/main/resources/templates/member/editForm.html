@@ -60,6 +60,29 @@
 											</div>
 											<div class="row">
 												<div class=" mb-3 col">
+													<label for="department">所属<span class="text-danger text-opacity-75">
+															- 必須</span></label>
+													<select class="form-select  form-select-sm"
+														th:field="*{department.departmentId}">
+														<th:block th:each="department : ${departments}">
+															<option th:value="${department.departmentId}"
+																th:text="${department.departmentName}">
+															</option>
+														</th:block>
+													</select>
+												</div>
+											</div>
+											<div class="row">
+												<div class=" mb-3 col">
+													<label for="mail">連絡先メール<span class="text-danger text-opacity-75">
+															- 必須</span></label>
+													<input type="text" class=" form-control form-control-sm"
+														th:errorclass="is-invalid" th:field="*{mail}">
+													<div class="invalid-feedback" th:errors="*{mail}"></div>
+												</div>
+											</div>
+											<div class="row">
+												<div class=" mb-3 col">
 													<label for="address">住所<span class="text-secondary text-opacity-75">
 															- 任意</span></label>
 													<input type="text" class=" form-control form-control-sm"
@@ -74,35 +97,12 @@
 														th:errorclass="is-invalid" th:field="*{phone}">
 													<div class="invalid-feedback" th:errors="*{phone}"></div>
 												</div>
-											</div>
-											<div class="row">
-												<div class=" mb-3 col">
-													<label for="mail">連絡先メール<span class="text-danger text-opacity-75">
-															- 必須</span></label>
-													<input type="text" class=" form-control form-control-sm"
-														th:errorclass="is-invalid" th:field="*{mail}">
-													<div class="invalid-feedback" th:errors="*{mail}"></div>
-												</div>
-											</div>
-											<div class="row">
-												<div class=" mb-3 col">
-													<label for="department">所属<span class="text-danger text-opacity-75">
-															- 必須</span></label>
-													<select class="form-select  form-select-sm"
-														th:field="*{department.departmentId}">
-														<th:block th:each="department : ${departments}">
-															<option th:value="${department.departmentId}"
-																th:text="${department.departmentName}">
-															</option>
-														</th:block>
-													</select>
-												</div>
-											</div>
+											</div>																					
 										</div>
 										<div class="mb-3 col-6">
 											<label for="notes">備考<span class="text-secondary text-opacity-75">
 													- 任意</span></label>
-											<textarea rows="13" class="form-control" th:field="*{notes}"></textarea>
+											<textarea rows="13" class="form-control" id="member-notes" th:field="*{notes}"></textarea>
 										</div>
 									</div>
 									<hr>

@@ -29,7 +29,8 @@ public class MeetingService {
 	}
 
 	public Optional<Meeting> editMeeting(Long meetingId) {
-		return meetingRepository.findById(meetingId);
+		Optional<Meeting> meeting = meetingRepository.findById(meetingId);
+		return meeting;
 	}
 
 	public boolean deleteMeeting(Long meetingId) {

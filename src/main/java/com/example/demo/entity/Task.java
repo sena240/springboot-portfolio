@@ -2,6 +2,9 @@ package com.example.demo.entity;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +12,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Entity
@@ -23,6 +28,7 @@ public class Task {
 	private Long taskId;
 	
 	// タスク名
+	@NotBlank(message = "タスク名を入力してください")
 	@Column(name = "task_name")
 	private String taskName;
 	
@@ -31,10 +37,14 @@ public class Task {
 	private TaskTag taskTag;
 	
 	// 開始日
+	@NotNull(message = "開始日を入力してください")
+	@DateTimeFormat(iso = ISO.DATE)
 	@Column(name = "start_date")
 	private LocalDate startDate;
 	
 	// 終了日
+	@NotNull(message = "終了日を入力してください")
+	@DateTimeFormat(iso = ISO.DATE)
 	@Column(name = "end_date")
 	private LocalDate endDate;
 	
@@ -49,10 +59,6 @@ public class Task {
 	// プロジェクトID（FK4）
 	@ManyToOne
 	private Project project;
-	
-	// 議事録ID（FK5）
-	@ManyToOne
-	private Meeting meeting;
 	
 	// 備考
 	@Column(name = "notes")

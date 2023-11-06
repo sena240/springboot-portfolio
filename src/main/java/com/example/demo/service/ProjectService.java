@@ -3,15 +3,12 @@ package com.example.demo.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.hibernate.Hibernate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Project;
 import com.example.demo.repository.ProjectRepository;
-
-import jakarta.transaction.Transactional;
 
 @Service
 public class ProjectService {
@@ -31,12 +28,8 @@ public class ProjectService {
 		return projectRepository.searchByQuery(searchQuery, pageable);
 	}
 
-	@Transactional
 	public Optional<Project> editProject(Long projectId) {
 		Optional<Project> project = projectRepository.findById(projectId);
-		project.ifPresent(p -> {
-			Hibernate.initialize(p.getMembers());
-		});
 		return project;
 	}
 

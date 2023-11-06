@@ -33,14 +33,15 @@
 								</div>
 							</div>
 							<div class="card-body">
-								<form th:action="@{/task/processAdd}" th:object="${task}" method="post" autocomplete="off"
-									id="taskForm">
+								<form th:action="@{/task/processAdd}" th:object="${task}" method="post"
+									autocomplete="off" id="taskForm">
 									<input type="hidden" th:field="*{taskId}">
 									<div class="row justify-content-center">
 										<div class=" mb-3 me-5 col-5">
 											<div class="row">
 												<div class=" mb-3 col">
-													<label for="task_name">タスク名<span class="text-danger text-opacity-75">
+													<label for="task_name">タスク名<span
+															class="text-danger text-opacity-75">
 															- 必須</span></label>
 													<input type="text" class=" form-control form-control-sm"
 														th:errorclass="is-invalid" th:field="*{taskName}">
@@ -49,7 +50,8 @@
 											</div>
 											<div class="row">
 												<div class=" mb-3 col">
-													<label for="task_tag">タスクタグ<span class="text-danger text-opacity-75">
+													<label for="task_tag">タスクタグ<span
+															class="text-danger text-opacity-75">
 															- 必須</span></label>
 													<select class="form-select  form-select-sm"
 														th:field="*{taskTag.taskTagId}">
@@ -65,7 +67,7 @@
 												<div class=" mb-3 col">
 													<label for="task_date">開始日<span class="text-danger text-opacity-75">
 															- 必須</span></label>
-													<input type="text" class=" form-control form-control-sm"
+													<input type="date" class=" form-control form-control-sm"
 														th:errorclass="is-invalid" th:field="*{startDate}">
 													<div class="invalid-feedback" th:errors="*{startDate}"></div>
 												</div>
@@ -74,7 +76,7 @@
 												<div class=" mb-3 col">
 													<label for="task_date">終了日<span class="text-danger text-opacity-75">
 															- 必須</span></label>
-													<input type="text" class=" form-control form-control-sm"
+													<input type="date" class=" form-control form-control-sm"
 														th:errorclass="is-invalid" th:field="*{endDate}">
 													<div class="invalid-feedback" th:errors="*{endDate}"></div>
 												</div>
@@ -95,7 +97,8 @@
 											</div>
 											<div class="row">
 												<div class=" mb-3 col">
-													<label for="task_room">ステータス<span class="text-danger text-opacity-75">
+													<label for="task_room">ステータス<span
+															class="text-danger text-opacity-75">
 															- 必須</span></label>
 													<select class="form-select  form-select-sm"
 														th:field="*{status.statusId}">
@@ -107,9 +110,21 @@
 													</select>
 												</div>
 											</div>
+										</div>
+										<div class="mb-3 col-6">
 											<div class="row">
 												<div class=" mb-3 col">
-													<label for="task_project">関連プロジェクト<span class="text-danger text-opacity-75">
+													<label for="task_summary">メモ<span
+															class="text-secondary text-opacity-75">
+															- 任意</span></label>
+													<textarea rows="13" class="form-control" id="task-notes"
+														th:field="*{notes}"></textarea>
+												</div>
+											</div>
+											<div class="row">
+												<div class=" mb-3 col">
+													<label for="task_project">関連プロジェクト<span
+															class="text-danger text-opacity-75">
 															- 必須</span></label>
 													<select class="form-select  form-select-sm"
 														th:field="*{project.projectId}">
@@ -121,25 +136,6 @@
 													</select>
 												</div>
 											</div>
-											<div class="row">
-												<div class=" mb-3 col">
-													<label for="task_project">関連会議<span class="text-danger text-opacity-75">
-															- 必須</span></label>
-													<select class="form-select  form-select-sm"
-														th:field="*{meeting.meetingId}">
-														<th:block th:each="meeting : ${meetings}">
-															<option th:value="${meeting.meetingId}"
-																th:text="${meeting.meetingName}">
-															</option>
-														</th:block>
-													</select>
-												</div>
-											</div>
-										</div>
-										<div class="mb-3 col-6">
-											<label for="task_summary">メモ<span class="text-secondary text-opacity-75">
-													- 任意</span></label>
-											<textarea rows="13" class="form-control" th:field="*{notes}"></textarea>
 										</div>
 									</div>
 									<hr>

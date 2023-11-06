@@ -55,14 +55,23 @@ public class ProjectController {
 
 	@GetMapping("/project/add")
 	public String addProjectForm(Model model) {
-	    model.addAttribute("project", new Project());
-	    model.addAttribute("members", memberService.allMember());    
-	    return "project/addForm";
+		model.addAttribute("project", new Project());
+		model.addAttribute("members", memberService.allMember());
+		return "project/addForm";
 	}
 
 	@PostMapping("/project/processAdd")
-	public String processAdd(@Validated @ModelAttribute Project project, BindingResult result) {
-		if (result.hasErrors()) {
+	public String processAdd(@Validated @ModelAttribute Project project, BindingResult result, Model model) {
+		boolean dateError = false;
+
+		if (project.getStartDate() != null && project.getEndDate() != null) {
+			if (project.getEndDate().isBefore(project.getStartDate())) {
+				result.rejectValue("endDate", "error.project", "終了日は開始日よりも後の日付でなければなりません。");
+				dateError = true;
+			}
+		}
+		if (result.hasErrors() || dateError) {
+			model.addAttribute("members", memberService.allMember());
 			return "/project/addForm";
 		}
 		projectService.saveProject(project);
@@ -70,8 +79,17 @@ public class ProjectController {
 	}
 
 	@PostMapping("/project/processEdit")
-	public String processEdit(@Validated @ModelAttribute Project project, BindingResult result) {
-		if (result.hasErrors()) {
+	public String processEdit(@Validated @ModelAttribute Project project, BindingResult result, Model model) {
+		boolean dateError = false;
+
+		if (project.getStartDate() != null && project.getEndDate() != null) {
+			if (project.getEndDate().isBefore(project.getStartDate())) {
+				result.rejectValue("endDate", "error.project", "終了日は開始日よりも後の日付でなければなりません。");
+				dateError = true;
+			}
+		}
+		if (result.hasErrors() || dateError) {
+			model.addAttribute("members", memberService.allMember());
 			return "/project/editForm";
 		}
 		projectService.saveProject(project);
@@ -81,11 +99,11 @@ public class ProjectController {
 	@GetMapping("/project/edit/{projectId}")
 	public String editProject(@PathVariable Long projectId, Model model) {
 		Optional<Project> optionalProject = projectService.editProject(projectId);
-
+	
 		if (optionalProject.isPresent()) {
 			Project project = optionalProject.get();
 			model.addAttribute("project", project);
-			model.addAttribute("members", memberService.allMember());   
+			model.addAttribute("members", memberService.allMember());
 		}
 		return "project/editForm";
 	}

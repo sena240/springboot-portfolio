@@ -16,13 +16,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.demo.entity.Meeting;
 import com.example.demo.entity.Member;
 import com.example.demo.entity.Project;
 import com.example.demo.entity.Status;
 import com.example.demo.entity.Task;
 import com.example.demo.entity.TaskTag;
-import com.example.demo.service.MeetingService;
 import com.example.demo.service.MemberService;
 import com.example.demo.service.ProjectService;
 import com.example.demo.service.StatusService;
@@ -38,7 +36,6 @@ public class TaskController {
 	private final TaskTagService taskTagService;
 	private final StatusService statusService;
 	private final ProjectService projectService;
-	private final MeetingService meetingService;
 	private final MemberService memberService;
 
 	@ModelAttribute("taskTags")
@@ -52,10 +49,6 @@ public class TaskController {
 	@ModelAttribute("projects")
 	public List<Project> populateProjects() {
 		return projectService.allProject();
-	}
-	@ModelAttribute("meetings")
-	public List<Meeting> populateMeetings() {
-		return meetingService.allMeeting();
 	}
 	@ModelAttribute("members")
 	public List<Member> populateMembers() {
@@ -85,7 +78,15 @@ public class TaskController {
 
 	@PostMapping("/task/processAdd")
 	public String processAdd(@Validated @ModelAttribute Task task, BindingResult result) {
-		if (result.hasErrors()) {
+	    boolean dateError = false;
+
+	    if (task.getStartDate() != null && task.getEndDate() != null) {
+	        if (task.getEndDate().isBefore(task.getStartDate())) {
+	            result.rejectValue("endDate", "error.task", "終了日は開始日よりも後の日付でなければなりません。");
+	            dateError = true;
+	        }
+	    }
+		if (result.hasErrors() || dateError) {
 			return "/task/addForm";
 		}
 		taskService.saveTask(task);
@@ -94,7 +95,15 @@ public class TaskController {
 
 	@PostMapping("/task/processEdit")
 	public String processEdit(@Validated @ModelAttribute Task task, BindingResult result) {
-		if (result.hasErrors()) {
+	    boolean dateError = false;
+
+	    if (task.getStartDate() != null && task.getEndDate() != null) {
+	        if (task.getEndDate().isBefore(task.getStartDate())) {
+	            result.rejectValue("endDate", "error.task", "終了日は開始日よりも後の日付でなければなりません。");
+	            dateError = true;
+	        }
+	    }
+		if (result.hasErrors() || dateError) {
 			return "/task/editForm";
 		}
 		taskService.saveTask(task);
@@ -111,7 +120,6 @@ public class TaskController {
 			model.addAttribute("taskTags", taskTagService.allTaskTag());
 			model.addAttribute("statuses", statusService.allStatus());
 			model.addAttribute("projects", projectService.allProject());
-			model.addAttribute("meetings", meetingService.allMeeting());
 			model.addAttribute("members", memberService.allMember());
 		}
 		return "task/editForm";
