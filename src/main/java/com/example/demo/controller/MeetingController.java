@@ -100,6 +100,7 @@ public class MeetingController {
 
 		if (optionalMeeting.isPresent()) {
 			Meeting meeting = optionalMeeting.get();
+			meeting.setMembers(null);
 			model.addAttribute("meeting", meeting);
 			model.addAttribute("meetingTags", meetingTagService.allMeetingTag());
 			model.addAttribute("meetingRooms", meetingRoomService.allMeetingRoom());

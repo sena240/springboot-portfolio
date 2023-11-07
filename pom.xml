@@ -6,15 +6,15 @@
 		<!-- Spring Bootの親プロジェクトを指定 -->
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.1.4</version>
-		<relativePath/> <!-- リポジトリから親プロジェクトを探す -->
+		<version>3.1.5</version>
+		<relativePath/>
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>portfolio</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging> <!-- WARファイルとしてパッケージング -->
+	<packaging>war</packaging>
 	<name>portfolio</name>
-	<description>Demo project for Spring Boot</description> <!-- プロジェクトの説明 -->
+	<description>Demo project for Spring Boot</description>
 	<properties>
 		<!-- Javaのバージョンを指定 -->
 		<java.version>17</java.version>
@@ -75,7 +75,6 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.12</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -63,12 +64,12 @@ public class Member {
 	private String notes;
 
 	//リレーション
-	@OneToMany(mappedBy = "member")
+	@OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
 	private List<Task> tasks;
 
-	@ManyToMany(mappedBy = "members")
+	@ManyToMany(mappedBy = "members", fetch = FetchType.EAGER)
 	private List<Project> projects;
 
-	@ManyToMany(mappedBy = "members")
+	@ManyToMany(mappedBy = "members", fetch = FetchType.EAGER)
 	private List<Meeting> meetings;
 }

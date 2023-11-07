@@ -64,6 +64,7 @@
 											<th>会議日</th>										
 											<th>会議室</th>
 											<th>関連プロジェクト</th>
+											<th>会議参加メンバー数</th>
 											<th></th>
 										</tr>
 									</thead>
@@ -75,6 +76,7 @@
 											<td th:text="${meeting.meetingDate}"></td>											
 											<td th:text="${meeting.meetingRoom.meetingRoomName}"></td>
 											<td th:text="${meeting.project.projectName}"></td>
+											<td th:text="${meeting.members != null ? meeting.members.size() : 0}"></td>
 											<td>
 												<div class="btn-group">
 													<button class="btn btn-white dropdown-toggle" type="button"

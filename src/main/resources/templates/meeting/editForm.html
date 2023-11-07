@@ -90,9 +90,9 @@
 												</div>
 											</div>
 											<div class="row">
-												<div class=" mb-3 col">
+												<div class="mb-3 col">
 													<label for="members">会議参加メンバー<span
-															class="text-danger text-opacity-75">- 必須</span></label>
+															class="text-danger text-opacity-75"> - 必須</span></label>
 													<select multiple class="form-select form-select-sm"
 														th:name="members">
 														<th:block th:each="member : ${members}">
@@ -101,6 +101,9 @@
 															</option>
 														</th:block>
 													</select>
+													<div class="text-danger" th:if="${#fields.hasErrors('members')}"
+														th:errors="*{members}">
+													</div>
 												</div>
 											</div>
 										</div>

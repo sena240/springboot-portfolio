@@ -12,6 +12,6 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
 	public Page<Task> findAll(Pageable pageable);
 
-	@Query("SELECT t FROM Task t WHERE t.taskName LIKE %:query% OR t.taskTag.taskTagName LIKE %:query%")
+	@Query("SELECT t FROM Task t WHERE t.taskName LIKE %:query% OR t.taskTag.taskTagName LIKE %:query% OR t.member.memberName LIKE %:query% OR t.status.statusName LIKE %:query% OR t.project.projectName LIKE %:query%")
 	Page<Task> searchByQuery(@Param("query") String query, Pageable pageable);
 }

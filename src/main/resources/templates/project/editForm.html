@@ -94,6 +94,10 @@
 															</option>
 														</th:block>
 													</select>
+													<div class="text-danger" th:if="${#fields.hasErrors('members')}"
+														th:errors="*{members}">
+													</div>
+
 												</div>
 											</div>
 										</div>

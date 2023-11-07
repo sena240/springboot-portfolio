@@ -102,6 +102,7 @@ public class ProjectController {
 	
 		if (optionalProject.isPresent()) {
 			Project project = optionalProject.get();
+			project.setMembers(null);
 			model.addAttribute("project", project);
 			model.addAttribute("members", memberService.allMember());
 		}

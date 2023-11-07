@@ -59,15 +59,18 @@ public class Project {
 	private LocalDate endDate;
 
 	// リレーション
-	@OneToMany(mappedBy = "project")
+	@OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
 	private List<Meeting> meetings;
 
 	@OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
 	private List<Task> tasks;
 
 	@NotNull(message = "プロジェクト参画メンバーを選択してください")
-	@ManyToMany
-	@JoinTable(name = "project_member", joinColumns = @JoinColumn(name = "project_id"), inverseJoinColumns = @JoinColumn(name = "member_id"))
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "project_member",
+	joinColumns = @JoinColumn(name = "project_id"),
+	inverseJoinColumns = @JoinColumn(name = "member_id")
+	)
 
 	private List<Member> members;
 }
