@@ -94,13 +94,15 @@
 															class="text-danger text-opacity-75">
 															- 必須</span></label>
 													<select multiple class="form-select form-select-sm"
-														th:field="*{members}">
+														th:name="members">
 														<th:block th:each="member : ${members}">
 															<option th:value="${member.memberId}"
-																th:text="${member.memberName}">
+																th:text="${member.memberName} + '（' + ${member.department.departmentName} + '）'">
 															</option>
 														</th:block>
 													</select>
+													<div class="text-danger" th:if="${#fields.hasErrors('members')}"
+														th:errors="*{members}"></div>
 												</div>
 											</div>
 										</div>

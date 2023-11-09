@@ -77,6 +77,7 @@ public class MeetingController {
 	@PostMapping("/meeting/processAdd")
 	public String processAdd(@Validated @ModelAttribute Meeting meeting, BindingResult result, Model model) {
 		if (result.hasErrors()) {
+			meeting.setMembers(null);
 			model.addAttribute("members", memberService.allMember());
 			return "/meeting/addForm";
 		}
@@ -87,6 +88,7 @@ public class MeetingController {
 	@PostMapping("/meeting/processEdit")
 	public String processEdit(@Validated @ModelAttribute Meeting meeting, BindingResult result, Model model) {
 		if (result.hasErrors()) {
+			meeting.setMembers(null);
 			model.addAttribute("members", memberService.allMember());
 			return "/meeting/editForm";
 		}
@@ -100,6 +102,7 @@ public class MeetingController {
 
 		if (optionalMeeting.isPresent()) {
 			Meeting meeting = optionalMeeting.get();
+			meeting.setMembers(null);
 			model.addAttribute("meeting", meeting);
 			model.addAttribute("meetingTags", meetingTagService.allMeetingTag());
 			model.addAttribute("meetingRooms", meetingRoomService.allMeetingRoom());

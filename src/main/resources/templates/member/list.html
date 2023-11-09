@@ -63,6 +63,9 @@
 											<th>フリガナ</th>
 											<th>所属</th>
 											<th>連絡先メール</th>
+											<th>参画プロジェクト数</th>
+											<th>会議参加数</th>
+											<th>担当タスク数</th>
 											<th></th>
 										</tr>
 									</thead>
@@ -73,6 +76,9 @@
 											<td th:text="${member.furigana}"></td>
 											<td th:text="${member.department.departmentName}"></td>
 											<td th:text="${member.mail}"></td>
+											<td th:text="${member.projects != null ? member.projects.size() : 0}"></td>
+											<td th:text="${member.meetings != null ? member.meetings.size() : 0}"></td>
+											<td th:text="${member.tasks != null ? member.tasks.size() : 0}"></td>
 											<td>
 												<div class="btn-group">
 													<button class="btn btn-white dropdown-toggle" type="button"

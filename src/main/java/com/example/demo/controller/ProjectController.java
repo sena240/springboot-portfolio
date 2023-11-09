@@ -72,6 +72,7 @@ public class ProjectController {
 		}
 		if (result.hasErrors() || dateError) {
 			model.addAttribute("members", memberService.allMember());
+			project.setMembers(null);
 			return "/project/addForm";
 		}
 		projectService.saveProject(project);
@@ -89,6 +90,7 @@ public class ProjectController {
 			}
 		}
 		if (result.hasErrors() || dateError) {
+			project.setMembers(null);
 			model.addAttribute("members", memberService.allMember());
 			return "/project/editForm";
 		}
@@ -102,6 +104,7 @@ public class ProjectController {
 	
 		if (optionalProject.isPresent()) {
 			Project project = optionalProject.get();
+			project.setMembers(null);
 			model.addAttribute("project", project);
 			model.addAttribute("members", memberService.allMember());
 		}

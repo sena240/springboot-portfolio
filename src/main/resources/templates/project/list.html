@@ -63,7 +63,9 @@
 											<th>プロジェクトタグ</th>
 											<th>開始日</th>
 											<th>終了日</th>
+											<th>議事録数</th>
 											<th>タスク数</th>
+											<th>参画メンバー数</th>
 											<th></th>
 										</tr>
 									</thead>
@@ -74,7 +76,9 @@
 											<td th:text="${project.projectTag.projectTagName}"></td>
 											<td th:text="${project.startDate}"></td>
 											<td th:text="${project.endDate}"></td>
+											<td th:text="${project.meetings != null ? project.meetings.size() : 0}"></td>
 											<td th:text="${project.tasks != null ? project.tasks.size() : 0}"></td>
+											<td th:text="${project.members != null ? project.members.size() : 0}"></td>
 											<td>
 												<div class="btn-group">
 													<button class="btn btn-white dropdown-toggle" type="button"

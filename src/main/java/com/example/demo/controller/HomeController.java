@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeController {
+
 	@GetMapping("/home/list")
 	public String showHomePage() {
 		return "home/list";

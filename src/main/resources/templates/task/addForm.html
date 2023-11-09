@@ -89,7 +89,7 @@
 														th:field="*{member.memberId}">
 														<th:block th:each="member : ${members}">
 															<option th:value="${member.memberId}"
-																th:text="${member.memberName}">
+																th:text="${member.memberName} + '（' + ${member.department.departmentName} + '）'">
 															</option>
 														</th:block>
 													</select>

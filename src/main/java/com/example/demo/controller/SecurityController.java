@@ -11,6 +11,12 @@ public class SecurityController {
 	public String login() {
 		return "login";
 	}
+	
+	@GetMapping("/error")
+	public String error() {
+		return "error";
+	}
+
 
 	@GetMapping("/")
 	public String loginHome(Authentication loginUser, Model model) {
